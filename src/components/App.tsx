@@ -9,6 +9,7 @@ import { darkTheme, lightTheme } from "../domain/Theme";
 import { createTheme, PaletteMode } from "@mui/material";
 import { Colorcontext } from "../domain/ColorContext";
 import Paper from "@mui/material/Paper";
+import { UserList } from "./users";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("dark");
@@ -30,7 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/Lessons" element={<LessonList />} />
-          <Route path="/Users" element={<></>} />
+          <Route path="/Users" element={<UserList />} />
           <Route path="/SignIn" element={<></>} />
         </Routes>
       </Paper>

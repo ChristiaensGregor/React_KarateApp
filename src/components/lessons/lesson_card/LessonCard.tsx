@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { LessonCardProps } from "./LessonCardProps";
 import "./LessonCard.css";
-import banner_kumite from "../../../resources/banner_kumite_wide.png";
+import banner_kumite_wide from "../../../resources/banner_kumite_wide.png";
+import banner_kumite from "../../../resources/banner_kumite.png";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -9,9 +11,24 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
+  const [windowWidth, setWindowSize] = useState<number>(getWindowWidth());
+  useEffect(() => {
+    function handleWindowResize() {
+      setWindowSize(getWindowWidth());
+    }
+    window.addEventListener("resize", handleWindowResize);
+    return () => {
+      window.removeEventListener("resize", handleWindowResize);
+    };
+  }, []);
+
   return (
     <Card>
-      <CardMedia component="img" height="200dvh" image={banner_kumite} alt="Image representing lesson type" />
+      <CardMedia
+        component="img"
+        image={windowWidth > 500 ? banner_kumite_wide : banner_kumite}
+        alt="Image representing lesson type"
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div" color={lesson.expired ? "error" : "text.primary"}>
           {lesson.type + " " + lesson.date.format("DD/MM/YYYY") + " " + lesson.location + " " + (lesson.expired ? "Expired" : "")}
@@ -37,3 +54,8 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
     </Card>
   );
 };
+
+function getWindowWidth() {
+  const { innerWidth, innerHeight } = window;
+  return innerWidth;
+}

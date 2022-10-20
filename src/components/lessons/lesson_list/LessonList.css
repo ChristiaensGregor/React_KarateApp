@@ -1,0 +1,18 @@
+.title {
+  font-size: 2em;
+  color: var(--textOnPrimary);
+}
+
+.banner {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+.banner Button {
+  display: block;
+}
+
+.wrapper {
+  padding: 10px 20px;
+}

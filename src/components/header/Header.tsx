@@ -15,9 +15,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Colorcontext } from "../../domain/ColorContext";
+import { auth } from "../../domain/Database";
 
 const pages = ["Lessons", "Users"];
-const settings = ["Theme", "Logout"];
+const settings = ["Theme", "Login", "Logout"];
 
 const Header = () => {
   let navigate = useNavigate();
@@ -42,7 +43,15 @@ const Header = () => {
     setAnchorElUser(null);
     if (setting === "Theme") {
       colorMode.toggleMode();
+    } else if (setting === "Login") {
+      navigate("/Login");
+    } else if ((setting = "Logout")) {
+      logout();
     }
+  };
+
+  const logout = async () => {
+    auth.signOut();
   };
 
   return (
@@ -96,7 +105,7 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} id={page + "Id"}>
                   <Typography
                     textAlign="center"
                     sx={{
@@ -130,7 +139,12 @@ const Header = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
-              <Button key={page} onClick={() => handleCloseNavMenu(page)} sx={{ my: 2, color: "white", display: "block" }}>
+              <Button
+                key={page}
+                onClick={() => handleCloseNavMenu(page)}
+                sx={{ my: 2, color: "white", display: "block" }}
+                id={page + "Id"}
+              >
                 {page}
               </Button>
             ))}

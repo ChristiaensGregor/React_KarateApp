@@ -1,5 +1,4 @@
 import karate_logo from "../../resources/karate_logo.png";
-import { Button } from "@mui/material";
 import "./HomePage.css";
 
 const HomePage = () => {

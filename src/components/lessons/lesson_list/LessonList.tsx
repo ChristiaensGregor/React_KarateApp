@@ -64,7 +64,9 @@ export const LessonList = () => {
   return (
     <>
       <Paper className="banner" elevation={1}>
-        <h4 className="title">List Lessons</h4>
+        <h4 className="title" id="listLessonsTitle">
+          List Lessons
+        </h4>
         <AddLesson setLesson={setLesson} />
       </Paper>
       {lessons.map((lesson) => {

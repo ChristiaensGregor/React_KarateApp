@@ -1,15 +1,17 @@
 import "./App.css";
-import Header from "./header/Header";
 import { Routes, Route } from "react-router-dom";
-import { LessonList } from "./lessons/index";
-import HomePage from "./home_page/HomePage";
 import { useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "../domain/Theme";
 import { createTheme, PaletteMode } from "@mui/material";
 import { Colorcontext } from "../domain/ColorContext";
 import Paper from "@mui/material/Paper";
+import Header from "./header/Header";
+import HomePage from "./home_page/HomePage";
+import Login from "./login/Login";
+import { LessonList } from "./lessons/index";
 import { UserList } from "./users";
+import Register from "./register/Register";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("dark");
@@ -32,7 +34,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/Lessons" element={<LessonList />} />
           <Route path="/Users" element={<UserList />} />
-          <Route path="/SignIn" element={<></>} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Register" element={<Register />} />
         </Routes>
       </Paper>
     </ThemeProvider>

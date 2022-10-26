@@ -30,7 +30,13 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
         alt="Image representing lesson type"
       />
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div" color={lesson.expired ? "error" : "text.primary"}>
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          color={lesson.expired ? "error" : "text.primary"}
+          id={lesson.id + "Id"}
+        >
           {lesson.type + " " + lesson.date.format("DD/MM/YYYY") + " " + lesson.location + " " + (lesson.expired ? "Expired" : "")}
         </Typography>
         <Typography variant="body2" color="text.secondary">

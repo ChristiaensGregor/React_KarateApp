@@ -13,24 +13,24 @@ import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/a
 import "./Login.css";
 
 const Login = () => {
-  const [emailError, setEmailError] = useState<string>();
-  const [passwordError, setPasswordError] = useState<string>();
+  const [email, setEmail] = useState<string>("");
+  const [emailError, setEmailError] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [passwordError, setPasswordError] = useState<string>("");
 
   const [user, setUser] = useState<User>();
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser!);
   });
-
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const email = data.get("email") as string;
-    const password = data.get("password") as string;
     if (email !== null && email !== undefined && email !== "" && password !== null && password !== undefined && password !== "") {
       try {
         setEmailError("");
         setPasswordError("");
         signInWithEmailAndPassword(auth, email, password);
+        setEmail("");
+        setPassword("");
       } catch (error) {
         console.error(error);
       }
@@ -61,28 +61,33 @@ const Login = () => {
         </Typography>
         <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
           <TextField
+            id="email"
+            name="email"
+            label="Email Address"
+            type={"email"}
+            autoComplete="email"
             margin="normal"
             required
             fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            error={emailError === null || emailError === undefined ? false : true}
-            helperText={emailError}
-            autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e: any) => setEmail(e.target.value)}
+            error={emailError === null || emailError === "" ? false : true}
+            helperText={emailError}
           />
           <TextField
-            margin="normal"
-            required
-            fullWidth
+            id="password"
             name="password"
+            margin="normal"
             label="Password"
             type="password"
-            error={passwordError === null || passwordError === undefined ? false : true}
-            helperText={passwordError}
-            id="password"
             autoComplete="current-password"
+            required
+            fullWidth
+            value={password}
+            onChange={(e: any) => setPassword(e.target.value)}
+            error={passwordError === null || passwordError === "" ? false : true}
+            helperText={passwordError}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Sign In

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,18 +10,25 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { auth } from "../../domain/Database";
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
-import "./Login.css";
 
 const Login = () => {
+  const [user, setUser] = useState<User | null>();
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
+
   const [email, setEmail] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [passwordError, setPasswordError] = useState<string>("");
 
-  const [user, setUser] = useState<User>();
-  onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser!);
-  });
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (email !== null && email !== undefined && email !== "" && password !== null && password !== undefined && password !== "") {
@@ -105,8 +112,8 @@ const Login = () => {
             </Grid>
           </Grid>
         </Box>
+        <h3>{user?.email}</h3>
       </Box>
-      <h3>{user?.email}</h3>
     </>
   );
 };

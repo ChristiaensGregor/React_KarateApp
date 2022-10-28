@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -12,6 +13,7 @@ import { auth } from "../../domain/Database";
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
 
   useEffect(() => {
@@ -36,8 +38,7 @@ const Login = () => {
         setEmailError("");
         setPasswordError("");
         signInWithEmailAndPassword(auth, email, password);
-        setEmail("");
-        setPassword("");
+        navigate("/");
       } catch (error) {
         console.error(error);
       }

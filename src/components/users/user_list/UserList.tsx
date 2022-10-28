@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { ref, set, remove, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { db } from "../../../domain/Database";
 import { UserInterface } from "../../../domain/UserInterface";
 
@@ -23,8 +23,6 @@ export const UserList = () => {
           };
           dbUsers.push(user);
         });
-        console.log("Users from database:");
-        console.log(dbUsers);
         setUsers(dbUsers);
       });
     }

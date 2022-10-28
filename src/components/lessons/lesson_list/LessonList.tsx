@@ -41,8 +41,6 @@ export const LessonList = () => {
           dbLessons.push(lesson);
         });
         dbLessons = dbLessons.sort((l1, l2) => (l1.date.isAfter(l2.date) ? 1 : -1));
-        console.log("Lessons from database:");
-        console.log(dbLessons);
         setLessons(dbLessons);
       });
     }

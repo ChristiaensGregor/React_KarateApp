@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import TextField from "@mui/material/TextField";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -9,8 +9,8 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { auth } from "../../domain/Database";
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../../domain/FireBaseConfig";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -107,7 +107,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link href="/Register" variant="body2">
+              <Link component={RouterLink} to="/Register" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

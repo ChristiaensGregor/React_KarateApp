@@ -8,7 +8,8 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { auth } from "../../domain/Database";
+import { auth } from "../../domain/FireBaseConfig";
+import { Link as RouterLink } from "react-router-dom";
 import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
 const Register = () => {
@@ -70,12 +71,12 @@ const Register = () => {
             autoComplete="current-password"
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Sign In
+            Register
           </Button>
           <Grid container>
             <Grid item xs></Grid>
             <Grid item>
-              <Link href="/Login" variant="body2">
+              <Link component={RouterLink} to="/Login" variant="body2">
                 {"Already have an account? Sign in"}
               </Link>
             </Grid>

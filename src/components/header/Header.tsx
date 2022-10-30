@@ -15,7 +15,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Colorcontext } from "../../domain/ColorContext";
-import { auth } from "../../domain/Database";
+import { auth } from "../../domain/FireBaseConfig";
 
 const pages = ["Lessons", "Users"];
 const settings = ["Theme", "Login", "Logout"];
@@ -47,6 +47,7 @@ const Header = () => {
       navigate("/Login");
     } else if ((setting = "Logout")) {
       logout();
+      navigate("/");
     }
   };
 

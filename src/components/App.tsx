@@ -12,6 +12,7 @@ import Login from "./login/Login";
 import { LessonList } from "./lessons/index";
 import { UserList } from "./users";
 import Register from "./register/Register";
+import { RouteGuard } from "./RouteGuard";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("dark");
@@ -32,8 +33,10 @@ function App() {
         </Colorcontext.Provider>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/Lessons" element={<LessonList />} />
-          <Route path="/Users" element={<UserList />} />
+          <Route element={<RouteGuard />}>
+            <Route path="/Lessons" element={<LessonList />} />
+            <Route path="/Users" element={<UserList />} />
+          </Route>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
         </Routes>

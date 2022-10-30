@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
-import { db } from "../../../domain/Database";
+import { db } from "../../../domain/FireBaseConfig";
 import { UserInterface } from "../../../domain/UserInterface";
 
 export const UserList = () => {

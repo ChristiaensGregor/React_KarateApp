@@ -4,7 +4,7 @@ import { LessonInterface } from "../../../domain/LessonInterface";
 import { DbLessonInterface } from "../../../domain/DbLessonInterface";
 import { LessonCard } from "../index";
 import { AddLesson } from "../index";
-import { db } from "../../../domain/Database";
+import { db } from "../../../domain/FireBaseConfig";
 import dayjs from "dayjs";
 import Paper from "@mui/material/Paper";
 import "./LessonList.css";

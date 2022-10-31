@@ -2,6 +2,11 @@ import { useState, useCallback, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../../../domain/FireBaseConfig";
 import { UserInterface } from "../../../domain/UserInterface";
+import Paper from "@mui/material/Paper";
+import Card from "@mui/material/Card";
+import { Button, CardActions, CardContent } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import "./UserList.css";
 
 export const UserList = () => {
   const [users, setUsers] = useState<UserInterface[]>([]);
@@ -34,12 +39,34 @@ export const UserList = () => {
 
   return (
     <>
+      <Paper className="banner" elevation={1}>
+        <h4 className="title" id="listLessonsTitle">
+          List Users
+        </h4>
+      </Paper>
       {users.map((user) => {
         return (
-          <div key={user.id}>
-            <p>{user.email}</p>
-            <p>{user.userName}</p>
-          </div>
+          <Card className="card" key={user.id}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div" color="text.primary">
+                {"" + user.userName}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Username: {user.userName}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Email Address: {user.email}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" color="inherit">
+                Edit
+              </Button>
+              <Button size="small" color="inherit">
+                Delete
+              </Button>
+            </CardActions>
+          </Card>
         );
       })}
     </>

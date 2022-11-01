@@ -39,6 +39,10 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
         >
           {lesson.type + " " + lesson.date.format("DD/MM/YYYY") + " " + lesson.location + " " + (lesson.expired ? "Expired" : "")}
         </Typography>
+        <Typography gutterBottom variant="h5" component="div" color="text.primary">
+          {" "}
+          Participants: {lesson.participants?.length}
+        </Typography>
         <Typography variant="body2" color="text.secondary">
           On {lesson.date.format("DD/MM/YYYY")} there will be a {lesson.type} training in the dojo located in {lesson.location}.
         </Typography>

@@ -7,4 +7,5 @@ export interface LessonInterface {
   type: String;
   location: String;
   expired: Boolean;
+  participants: String[];
 }

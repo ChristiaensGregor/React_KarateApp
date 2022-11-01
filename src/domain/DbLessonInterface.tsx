@@ -6,4 +6,5 @@ export interface DbLessonInterface {
   type: String;
   location: String;
   expired: Boolean;
+  participants: String[];
 }

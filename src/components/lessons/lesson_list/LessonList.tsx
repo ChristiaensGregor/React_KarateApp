@@ -25,6 +25,7 @@ export const LessonList = () => {
             type: dataLesson.type as string,
             location: dataLesson.location as string,
             expired: dataLesson.expired as Boolean,
+            participants: dataLesson.participants as string[],
           };
           var day = new Date();
           day.setDate(day.getDate() - 1);
@@ -36,6 +37,7 @@ export const LessonList = () => {
               type: lesson.type,
               location: lesson.location,
               expired: true,
+              participants: lesson.participants,
             });
           }
           dbLessons.push(lesson);

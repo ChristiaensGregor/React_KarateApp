@@ -42,6 +42,7 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
       type: type,
       location: location,
       expired: !date?.isAfter(dayjs(day)),
+      participants: [],
     });
   };
 

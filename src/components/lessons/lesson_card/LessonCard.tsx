@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Key } from "react";
 import { LessonCardProps } from "./LessonCardProps";
 import "./LessonCard.css";
 import banner_kumite_wide from "../../../resources/banner_kumite_wide.png";
@@ -9,6 +9,9 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { ref, set } from "firebase/database";
+import { db } from "../../../domain/FireBaseConfig";
+import { auth } from "../../../domain/FireBaseConfig";
 
 export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
   const [windowWidth, setWindowSize] = useState<number>(getWindowWidth());
@@ -21,6 +24,33 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
       window.removeEventListener("resize", handleWindowResize);
     };
   }, []);
+
+  function participate() {
+    let user: string = auth.currentUser?.uid!;
+    if (user) {
+      if (lesson.participants) {
+        if (lesson.participants.find((id) => id === user)) {
+          const index = lesson.participants.indexOf(user);
+          if (index !== -1) {
+            lesson.participants.splice(index, 1);
+          }
+        } else {
+          lesson.participants.push(user);
+        }
+      } else {
+        lesson.participants = [user];
+      }
+      var dbLesson = {
+        id: lesson.id,
+        date: lesson.date?.format("DD/MM/YYYY"),
+        type: lesson.type,
+        location: lesson.location,
+        expired: lesson.expired,
+        participants: lesson.participants,
+      };
+      set(ref(db, "lessons/" + (lesson.id as Key)), dbLesson);
+    }
+  }
 
   return (
     <Card>
@@ -48,8 +78,8 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="inherit">
-          Edit
+        <Button size="small" color="inherit" onClick={participate}>
+          Participate
         </Button>
         <Button
           size="small"
@@ -66,6 +96,6 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
 };
 
 function getWindowWidth() {
-  const { innerWidth, innerHeight } = window;
+  const { innerWidth } = window;
   return innerWidth;
 }

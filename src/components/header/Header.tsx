@@ -64,6 +64,7 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
+            id="navigation_Home"
             className="homeButton"
             variant="h6"
             noWrap
@@ -111,7 +112,7 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} id={page + "Id"}>
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} id={"navigation_" + page}>
                   <Typography
                     textAlign="center"
                     sx={{
@@ -126,6 +127,7 @@ const Header = () => {
             </Menu>
           </Box>
           <Typography
+            id="navigation_Home"
             variant="h5"
             noWrap
             component="a"
@@ -149,7 +151,7 @@ const Header = () => {
                 key={page}
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
-                id={page + "Id"}
+                id={"navigation_" + page}
               >
                 {page}
               </Button>
@@ -158,7 +160,7 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} id="navigation_Settings">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -179,7 +181,7 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)}>
+                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)} id={"navigation_Setting_" + setting}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}

@@ -70,7 +70,7 @@ const Register = () => {
             id="password"
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="register_register">
             Register
           </Button>
           <Grid container>

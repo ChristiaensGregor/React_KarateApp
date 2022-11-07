@@ -9,10 +9,11 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { auth } from "../../domain/FireBaseConfig";
-import { Link as RouterLink } from "react-router-dom";
+import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
 const Register = () => {
+  let navigate = useNavigate();
   const [user, setUser] = useState<User>();
   onAuthStateChanged(auth, (currentUser) => {
     setUser(currentUser!);
@@ -26,7 +27,7 @@ const Register = () => {
     if (email !== null && password !== null) {
       try {
         const user = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        navigate("/");
       } catch (error) {
         console.log("Register error");
       }

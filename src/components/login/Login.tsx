@@ -97,7 +97,7 @@ const Login = () => {
             error={passwordError === null || passwordError === "" ? false : true}
             helperText={passwordError}
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="login_login">
             Sign In
           </Button>
           <Grid container>
@@ -107,7 +107,7 @@ const Login = () => {
               </Link>
             </Grid>
             <Grid item>
-              <Link component={RouterLink} to="/Register" variant="body2">
+              <Link component={RouterLink} to="/Register" variant="body2" id="login_register_prompt">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>

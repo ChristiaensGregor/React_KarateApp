@@ -1,5 +1,5 @@
 import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import { darkTheme, lightTheme } from "../domain/Theme";
@@ -39,6 +39,7 @@ function App() {
           </Route>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />
+          <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </Paper>
     </ThemeProvider>

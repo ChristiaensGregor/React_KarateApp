@@ -79,6 +79,7 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}
+            data-cy="navigation-home-button"
           >
             Karate Lessons
           </Typography>
@@ -119,6 +120,7 @@ const Header = () => {
                       color: "inherit",
                       textDecoration: "none",
                     }}
+                    data-cy={"navigation-" + page + "-button"}
                   >
                     {page}
                   </Typography>

@@ -16,6 +16,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Colorcontext } from "../../domain/ColorContext";
 import { auth } from "../../domain/FireBaseConfig";
+import { useTheme } from "@mui/material/styles";
 
 const pages = ["Lessons", "Users"];
 const settings = ["Theme", "Login", "Logout"];
@@ -23,6 +24,7 @@ const settings = ["Theme", "Login", "Logout"];
 const Header = () => {
   let navigate = useNavigate();
   const colorMode = useContext(Colorcontext);
+  const theme = useTheme();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
@@ -186,7 +188,9 @@ const Header = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)} id={"navigation_Setting_" + setting}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center">
+                    {setting == "Theme" ? "Switch to " + (theme.palette.mode == "dark" ? "light" : "dark") : setting}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>

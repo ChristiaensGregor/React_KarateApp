@@ -120,7 +120,7 @@ const Header = () => {
                       color: "inherit",
                       textDecoration: "none",
                     }}
-                    data-cy={"navigation-" + page + "-button"}
+                    data-cy={"navigation-hamburger-" + page + "-button"}
                   >
                     {page}
                   </Typography>
@@ -144,6 +144,7 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}
+            data-cy="navigation-home-button"
           >
             Karate Lessons
           </Typography>
@@ -154,6 +155,7 @@ const Header = () => {
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
                 id={"navigation_" + page}
+                data-cy={"navigation-" + page + "-button"}
               >
                 {page}
               </Button>

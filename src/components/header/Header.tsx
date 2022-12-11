@@ -66,7 +66,7 @@ const Header = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
-            id="navigation_Home"
+            data-cy="navigation-home-button"
             className="homeButton"
             variant="h6"
             noWrap
@@ -81,7 +81,6 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}
-            data-cy="navigation-home-button"
           >
             Karate Lessons
           </Typography>
@@ -115,7 +114,11 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} id={"navigation_" + page}>
+                <MenuItem
+                  key={page}
+                  onClick={() => handleCloseNavMenu(page)}
+                  data-cy={"navigation-hamburger-" + page + "-button"}
+                >
                   <Typography
                     textAlign="center"
                     sx={{
@@ -131,7 +134,7 @@ const Header = () => {
             </Menu>
           </Box>
           <Typography
-            id="navigation_Home"
+            data-cy="navigation-home-button"
             variant="h5"
             noWrap
             component="a"
@@ -146,7 +149,6 @@ const Header = () => {
               color: "inherit",
               textDecoration: "none",
             }}
-            data-cy="navigation-home-button"
           >
             Karate Lessons
           </Typography>
@@ -156,7 +158,6 @@ const Header = () => {
                 key={page}
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
-                id={"navigation_" + page}
                 data-cy={"navigation-" + page + "-button"}
               >
                 {page}
@@ -166,7 +167,7 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} id="navigation_Settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} data-cy="navigation-setting-button">
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -187,7 +188,11 @@ const Header = () => {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={() => handleCloseUserMenu(setting)} id={"navigation_Setting_" + setting}>
+                <MenuItem
+                  key={setting}
+                  onClick={() => handleCloseUserMenu(setting)}
+                  data-cy={"navigation-setting-" + setting + "-button"}
+                >
                   <Typography textAlign="center">
                     {setting == "Theme" ? "Switch to " + (theme.palette.mode == "dark" ? "light" : "dark") : setting}
                   </Typography>

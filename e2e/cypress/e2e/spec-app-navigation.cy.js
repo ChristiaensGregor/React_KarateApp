@@ -1,6 +1,6 @@
 const homePage = require("../pages/HomePage");
 
-describe("app navigation", () => {
+describe("app navigation new user", () => {
   beforeEach(() => {
     cy.visit("");
   });
@@ -8,8 +8,8 @@ describe("app navigation", () => {
   it("As a user i should be able to click on the app logo to navigate home", function () {
     homePage.NavigationHome().first().click();
     cy.url().should("equal", "http://localhost:3000/");
-    cy.visit("login");
-    cy.url().should("equal", "http://localhost:3000/login");
+    cy.visit("Login");
+    cy.url().should("equal", "http://localhost:3000/Login");
     homePage.NavigationHome().first().click();
     cy.url().should("equal", "http://localhost:3000/");
   });
@@ -19,7 +19,7 @@ describe("app navigation", () => {
     homePage.NavigationLessons().should("have.text", "Lessons");
     homePage.NavigationLessons().should("be.enabled");
     homePage.NavigationLessons().click();
-    cy.url().should("equal", "http://localhost:3000/login");
+    cy.url().should("equal", "http://localhost:3000/Login");
   });
 
   it("As a user i should be able to click on Users in the navigation menu", function () {
@@ -27,17 +27,16 @@ describe("app navigation", () => {
     homePage.NavigationUsers().should("have.text", "Users");
     homePage.NavigationUsers().should("be.enabled");
     homePage.NavigationUsers().click();
-    cy.url().should("equal", "http://localhost:3000/login");
+    cy.url().should("equal", "http://localhost:3000/Login");
   });
 
-  /* ==== Test Created with Cypress Studio ==== */
   it("As a user i should be able to click on Profile in the navigation menu", function () {
     cy.get(".MuiAvatar-root").should("be.visible");
     cy.get(".MuiAvatar-root").click();
     homePage.NavigationSettingsTheme().should("be.visible");
     homePage.NavigationSettingsLogin().should("be.visible");
     homePage.NavigationSettingsLogout().should("be.visible");
-    cy.get(".css-1t3k1b1-MuiModal-root-MuiPopover-root-MuiMenu-root > .MuiBackdrop-root").click();
+    cy.xpath("//body").click();
     homePage.NavigationSettingsTheme().should("not.be.visible");
     homePage.NavigationSettingsLogin().should("not.be.visible");
     homePage.NavigationSettingsLogout().should("not.be.visible");

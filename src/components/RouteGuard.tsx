@@ -8,5 +8,5 @@ const useAuth = (): boolean => {
 
 export const RouteGuard = () => {
   //Optionally return the <Login/> Component directly but then the url will not match.
-  return useAuth() ? <Outlet /> : <Navigate to="/login" />;
+  return useAuth() ? <Outlet /> : <Navigate to="/Login" />;
 };

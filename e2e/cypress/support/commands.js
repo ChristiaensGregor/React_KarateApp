@@ -1,4 +1,16 @@
+const homePage = require("../pages/HomePage");
+const loginPage = require("../pages/LoginPage");
+
 require("@cypress/xpath");
+Cypress.Commands.add("login", (email, password) => {
+  homePage.NavigationSettings().click();
+  homePage.NavigationSettingsLogin().click();
+  loginPage.EmailField().click();
+  loginPage.EmailField().type(email);
+  loginPage.PasswordField().click();
+  loginPage.PasswordField().type(password);
+  loginPage.LoginButton().click();
+});
 // ***********************************************
 // This example commands.js shows you how to
 // create various custom commands and overwrite
@@ -8,10 +20,6 @@ require("@cypress/xpath");
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
 //
 //
 // -- This is a child command --

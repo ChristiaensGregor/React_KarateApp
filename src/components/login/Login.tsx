@@ -82,6 +82,7 @@ const Login = () => {
             onChange={(e: any) => setEmail(e.target.value)}
             error={emailError === null || emailError === "" ? false : true}
             helperText={emailError}
+            data-cy="login-Email-field"
           />
           <TextField
             id="password"
@@ -96,8 +97,9 @@ const Login = () => {
             onChange={(e: any) => setPassword(e.target.value)}
             error={passwordError === null || passwordError === "" ? false : true}
             helperText={passwordError}
+            data-cy="login-Password-field"
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="login_login">
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="login_login" data-cy="login-Login-button">
             Sign In
           </Button>
           <Grid container>

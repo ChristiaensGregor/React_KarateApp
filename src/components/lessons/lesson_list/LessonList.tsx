@@ -64,7 +64,7 @@ export const LessonList = () => {
   return (
     <>
       <Paper className="banner" elevation={1}>
-        <h4 className="title" id="listLessonsTitle">
+        <h4 className="title" data-cy="lesson-list-title">
           List Lessons
         </h4>
         <AddLesson setLesson={setLesson} />

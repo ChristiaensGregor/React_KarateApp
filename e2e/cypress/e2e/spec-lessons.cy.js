@@ -1,4 +1,5 @@
 const homePage = require("../pages/HomePage");
+const lessonPage = require("../pages/LessonPage");
 
 describe("Lessons page", () => {
   beforeEach(() => {
@@ -9,5 +10,7 @@ describe("Lessons page", () => {
 
   it("passes", () => {
     cy.url().should("contain", "/Lessons");
+    lessonPage.getLessonListTitle().should("have.text", "List Lessons");
+    lessonPage.getLessonCard(1).click();
   });
 });

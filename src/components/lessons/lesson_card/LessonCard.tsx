@@ -53,7 +53,7 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
   }
 
   return (
-    <Card id={lesson.id ? lesson.id.toString() : ""}>
+    <Card id={lesson.id ? lesson.id.toString() : ""} data-cy="lesson-card">
       <CardMedia
         component="img"
         image={windowWidth > 500 ? banner_kumite_wide : banner_kumite}

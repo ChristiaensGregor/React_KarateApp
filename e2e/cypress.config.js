@@ -6,9 +6,16 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:3000/",
     experimentalStudio: true,
     experimentalRunAllSpecs: true,
-    retries: 2,
-    setupNodeEvents(on, config) {
-      // implement node event listeners here
+    video: false,
+    screenshotOnRunFailure: false,
+    retries: 5,
+    reporter: "mochawesome",
+    reporterOptions: {
+      reportDir: "cypress/reports",
+      overwrite: false,
+      charts: true,
+      autoOpen: true,
+      reportFilename: "[name]-[datetime]-report-[status]",
     },
   },
 });

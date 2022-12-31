@@ -11,11 +11,12 @@ module.exports = defineConfig({
     retries: 5,
     reporter: "mochawesome",
     reporterOptions: {
-      reportDir: "cypress/reports",
-      overwrite: false,
+      reportDir: "../reporting/specs",
+      overwrite: true,
       charts: true,
-      autoOpen: true,
-      reportFilename: "[name]-[datetime]-report-[status]",
+      autoOpen: false,
+      html: false,
+      reportFilename: "[name]-report-[status]",
     },
   },
 });

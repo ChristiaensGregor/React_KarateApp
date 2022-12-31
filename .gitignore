@@ -10,7 +10,7 @@ e2e/node_modules
 
 # testing
 /coverage
-e2e/cypress/reports
+/reporting
 
 # production
 /build

@@ -8,7 +8,7 @@ describe("Lessons page", () => {
     homePage.NavigationLessons().click();
   });
 
-  it("passes", () => {
+  it("The lesson page should display lessons", () => {
     cy.url().should("contain", "/Lessons");
     lessonPage.getLessonListTitle().should("have.text", "List Lessons");
     lessonPage.getLessonCard(1).click();

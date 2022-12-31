@@ -25,7 +25,7 @@ export const LessonList = () => {
             type: dataLesson.type as string,
             location: dataLesson.location as string,
             expired: dataLesson.expired as Boolean,
-            participants: dataLesson.participants as string[],
+            participants: dataLesson.participants ? (dataLesson.participants as string[]) : [],
           };
           var day = new Date();
           day.setDate(day.getDate() - 1);

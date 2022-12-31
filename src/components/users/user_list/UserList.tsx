@@ -40,7 +40,7 @@ export const UserList = () => {
   return (
     <>
       <Paper className="banner" elevation={1}>
-        <h4 className="title" id="listLessonsTitle">
+        <h4 className="title" data-cy="listUsersTitle">
           List Users
         </h4>
       </Paper>

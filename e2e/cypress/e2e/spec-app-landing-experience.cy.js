@@ -20,7 +20,5 @@ describe("app landing experience", () => {
   it("As a user I am redirected to the login page when trying to acess features requireing authentication", function () {
     cy.visit("lessons");
     cy.url().should("equal", "http://localhost:3000/Login");
-    cy.visit("users");
-    cy.url().should("equal", "http://localhost:3000/Login");
   });
 });

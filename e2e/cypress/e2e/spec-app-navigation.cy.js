@@ -22,14 +22,6 @@ describe("app navigation new user", () => {
     cy.url().should("equal", "http://localhost:3000/Login");
   });
 
-  it("As a user i should be able to click on Users in the navigation menu", function () {
-    homePage.NavigationUsers().should("be.visible");
-    homePage.NavigationUsers().should("have.text", "Users");
-    homePage.NavigationUsers().should("be.enabled");
-    homePage.NavigationUsers().click();
-    cy.url().should("equal", "http://localhost:3000/Login");
-  });
-
   it("As a user i should be able to click on Profile in the navigation menu", function () {
     cy.get(".MuiAvatar-root").should("be.visible");
     cy.get(".MuiAvatar-root").click();

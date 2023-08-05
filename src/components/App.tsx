@@ -10,9 +10,8 @@ import Header from "./header/Header";
 import HomePage from "./home_page/HomePage";
 import Login from "./login/Login";
 import { LessonList } from "./lessons/index";
-import { UserList } from "./users";
 import Register from "./register/Register";
-import { RouteGuard } from "./RouteGuard";
+import { RouteGuard } from "../domain/RouteGuard";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("dark");
@@ -35,7 +34,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route element={<RouteGuard />}>
             <Route path="/Lessons" element={<LessonList />} />
-            <Route path="/Users" element={<UserList />} />
           </Route>
           <Route path="/Login" element={<Login />} />
           <Route path="/Register" element={<Register />} />

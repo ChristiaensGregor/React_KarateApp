@@ -18,7 +18,7 @@ import { Colorcontext } from "../../domain/ColorContext";
 import { auth } from "../../domain/FireBaseConfig";
 import { useTheme } from "@mui/material/styles";
 
-const pages = ["Lessons", "Users"];
+const pages = ["Lessons"];
 const settings = ["Theme", "Login", "Logout"];
 
 const Header = () => {
@@ -82,7 +82,7 @@ const Header = () => {
               textDecoration: "none",
             }}
           >
-            Karate Lessons
+            My Karate club
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton

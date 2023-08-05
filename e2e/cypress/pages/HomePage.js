@@ -9,3 +9,4 @@ class HomePage {
 }
 
 module.exports = new HomePage(); //TODO Adjust this, currently it recreates the pageObject every time?
+//test

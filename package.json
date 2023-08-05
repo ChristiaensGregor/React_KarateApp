@@ -7,7 +7,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-cy": "cd e2e && npx cypress run && npx mochawesome-merge ../reporting/specs/*.json > ../reporting/merge-output.json && npx marge ../reporting/merge-output.json --reportDir ../reporting --reportFilename KarateApp-[datetime]-report --timestamp \"dd/mm/yyyy HH:MM\" --reportTitle \"KarateApp Cypress Report\" --reportPageTitle \"KarateApp Cypress Report\" --autoOpen true --charts true"
+    "test-cy": "cd e2e && npx cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -53,8 +53,6 @@
   },
   "devDependencies": {
     "cypress": "^12.2.0",
-    "mochawesome": "^7.1.3",
-    "mochawesome-merge": "^4.2.2",
-    "mochawesome-report-generator": "^6.2.0"
+    "@cypress/xpath": "^2.0.3"
   }
 }

@@ -3,6 +3,7 @@ describe("app landing experience", () => {
     cy.visit("home");
     cy.url().should("equal", "http://localhost:3000/home");
   });
+
   it("As a user i should be redirected towards the home page when browing a nonexistent path", () => {
     cy.visit("/blablabla");
     cy.url().should("equal", "http://localhost:3000/");

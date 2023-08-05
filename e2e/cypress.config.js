@@ -6,6 +6,6 @@ module.exports = defineConfig({
     baseUrl: "http://localhost:3000/",
     retries: 2,
     video: false,
-    screenshotOnRunFailure: false,
+    screenshotOnRunFailure: true,
   },
 });

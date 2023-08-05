@@ -1,7 +1,8 @@
 name: Firebase CI
-
 on:
-  push: branches:main
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -9,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [15.x]
+        node-version: [16.x]
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master

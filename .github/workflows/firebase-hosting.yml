@@ -21,6 +21,7 @@ jobs:
       - name: Install Dependencies
         run: npm install
       - run: npm install -g firebase-tools
+      - run: echo "${{ secrets.FIREBASE_OPTIONS }}" > src/domain/FireBaseOptions.tsx
       - run: npm start &
       - run: npx wait-on http://localhost:3000
       - run: npm run test-cy

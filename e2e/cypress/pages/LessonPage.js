@@ -1,6 +1,6 @@
 class LessonPage {
-  getLessonListTitle = () => cy.xpath('//*[@data-cy="lesson-list-title"]');
-  getLessonCard = (index) => cy.xpath(`(//*[@data-cy="lesson-card"])[${index}]`);
+  ListTitle = '[data-cy="lesson-list-title"]';
+  LessonCards = '[data-cy="lesson-card"]';
 }
-
-module.exports = new LessonPage();
+const lessonPage = new LessonPage();
+export { lessonPage };

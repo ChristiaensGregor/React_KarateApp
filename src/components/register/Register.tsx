@@ -10,7 +10,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { auth } from "../../domain/FireBaseConfig";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
-import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
+import { onAuthStateChanged, User } from "firebase/auth";
+//import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
 const Register = () => {
   let navigate = useNavigate();
@@ -26,7 +27,7 @@ const Register = () => {
     const password = data.get("password") as string;
     if (email !== null && password !== null) {
       try {
-        const user = await createUserWithEmailAndPassword(auth, email, password);
+        //const user = await createUserWithEmailAndPassword(auth, email, password);
         navigate("/");
       } catch (error) {
         console.log("Register error");

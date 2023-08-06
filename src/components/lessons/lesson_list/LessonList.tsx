@@ -1,4 +1,4 @@
-import { useEffect, Key, useState, useCallback } from "react";
+import { useEffect, Key, useState, useCallback, useRef } from "react";
 import { ref, set, remove, onValue } from "firebase/database";
 import { LessonInterface } from "../../../domain/LessonInterface";
 import { DbLessonInterface } from "../../../domain/DbLessonInterface";
@@ -11,8 +11,9 @@ import "./LessonList.css";
 
 export const LessonList = () => {
   const [lessons, setLessons] = useState<LessonInterface[]>([]);
-  var init = false;
+  const initRef = useRef(false);
   const getLessons = useCallback(() => {
+    const init = initRef.current;
     if (!init) {
       const lessonsRef = ref(db, "lessons");
       onValue(lessonsRef, (snapshot) => {
@@ -46,7 +47,7 @@ export const LessonList = () => {
         setLessons(dbLessons);
       });
     }
-    init = true;
+    initRef.current = true;
   }, []);
 
   useEffect(() => {

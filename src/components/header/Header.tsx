@@ -194,7 +194,7 @@ const Header = () => {
                   data-cy={"navigation-setting-" + setting + "-button"}
                 >
                   <Typography textAlign="center">
-                    {setting == "Theme" ? "Switch to " + (theme.palette.mode == "dark" ? "light" : "dark") : setting}
+                    {setting === "Theme" ? "Switch to " + (theme.palette.mode === "dark" ? "light" : "dark") : setting}
                   </Typography>
                 </MenuItem>
               ))}

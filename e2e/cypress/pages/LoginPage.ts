@@ -4,4 +4,5 @@ class LoginPage {
   LoginButton = () => cy.xpath('//*[@data-cy="login-Login-button"]');
 }
 
-module.exports = new LoginPage();
+const loginPage = new LoginPage()
+export {loginPage}

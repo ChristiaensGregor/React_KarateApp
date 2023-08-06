@@ -1,4 +1,4 @@
-const { defineConfig } = require("cypress");
+import {defineConfig} from 'cypress'
 
 module.exports = defineConfig({
   projectId: "aj3a25",
@@ -7,5 +7,6 @@ module.exports = defineConfig({
     retries: 2,
     video: false,
     screenshotOnRunFailure: true,
+    experimentalRunAllSpecs:true
   },
 });

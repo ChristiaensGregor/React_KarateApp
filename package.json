@@ -5,9 +5,9 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test-cy": "npx cypress run -b chrome --e2e -P e2e"
+    "test": "react-scripts test",
+    "test-cy": "npx cypress run -b chrome --e2e -P e2e --record --key 83188b6b-2bbd-4fd1-92da-8661362866a1"
   },
   "eslintConfig": {
     "extends": [

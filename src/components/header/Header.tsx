@@ -18,8 +18,8 @@ import { Colorcontext } from "../../domain/ColorContext";
 import { auth } from "../../domain/FireBaseConfig";
 import { useTheme } from "@mui/material/styles";
 
-const pages = ["Lessons"];
-const settings = ["Theme", "Login", "Logout"];
+const pages = ["lessons"];
+const settings = ["theme", "login", "logout"];
 
 const Header = () => {
   let navigate = useNavigate();
@@ -43,11 +43,11 @@ const Header = () => {
 
   const handleCloseUserMenu = (setting: String) => {
     setAnchorElUser(null);
-    if (setting === "Theme") {
+    if (setting === "theme") {
       colorMode.toggleMode();
-    } else if (setting === "Login") {
+    } else if (setting === "login") {
       navigate("/Login");
-    } else if ((setting = "Logout")) {
+    } else if ((setting = "logout")) {
       logout();
       navigate("/");
     }
@@ -194,7 +194,7 @@ const Header = () => {
                   data-cy={"navigation-setting-" + setting + "-button"}
                 >
                   <Typography textAlign="center">
-                    {setting === "Theme" ? "Switch to " + (theme.palette.mode === "dark" ? "light" : "dark") : setting}
+                    {setting === "theme" ? "Switch to " + (theme.palette.mode === "dark" ? "light" : "dark") : setting}
                   </Typography>
                 </MenuItem>
               ))}

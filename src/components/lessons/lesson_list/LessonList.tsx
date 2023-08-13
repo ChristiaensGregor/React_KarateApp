@@ -16,6 +16,7 @@ import "./LessonList.css";
 export default function LessonList() {
   const [lessons, setLessons] = useState<LessonInterface[]>([]);
   const initRef = useRef(false);
+  // eslint-disable-next-line
   const handleSetLesson = useCallback((lessonId: Key, lesson: DbLessonInterface) => {
     set(ref(db, `lessons/${lessonId}`), lesson);
   }, []);
@@ -27,6 +28,7 @@ export default function LessonList() {
       onValue(lessonsRef, (snapshot) => {
         const data = snapshot.val();
         let dbLessons: LessonInterface[] = [];
+        // eslint-disable-next-line
         Object.values(data).forEach((dataLesson: any) => {
           const lesson: LessonInterface = {
             id: dataLesson.id as string,
@@ -39,7 +41,6 @@ export default function LessonList() {
           const day = new Date();
           day.setDate(day.getDate() - 1);
           if (!lesson.date.isAfter(dayjs(day)) && lesson.expired === false) {
-            console.log(`Setting ${lesson.id} to expired`);
             handleSetLesson(lesson.id, {
               id: lesson.id,
               date: lesson.date.format("DD/MM/YYYY"),
@@ -56,7 +57,7 @@ export default function LessonList() {
       });
     }
     initRef.current = true;
-  }, []);
+  }, [handleSetLesson]);
 
   useEffect(() => {
     getLessons();

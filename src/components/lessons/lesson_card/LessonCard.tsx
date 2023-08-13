@@ -1,8 +1,5 @@
-import { useEffect, useState, Key } from "react";
-import { LessonCardProps } from "./LessonCardProps";
+import React, { useEffect, useState, Key } from "react";
 import "./LessonCard.css";
-import banner_kumite_wide from "../../../resources/banner_kumite_wide.png";
-import banner_kumite from "../../../resources/banner_kumite.png";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -10,10 +7,17 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { ref, set } from "firebase/database";
-import { db } from "../../../domain/FireBaseConfig";
-import { auth } from "../../../domain/FireBaseConfig";
+import bannerKumite from "../../../resources/bannerKumite.png";
+import bannerKumiteWide from "../../../resources/bannerKumiteWide.png";
+import { LessonCardProps } from "./LessonCardProps.tsx";
+import { db, auth } from "../../../domain/FireBaseConfig.tsx";
 
-export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
+export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
+  function getWindowWidth() {
+    const { innerWidth } = window;
+    return innerWidth;
+  }
+
   const [windowWidth, setWindowSize] = useState<number>(getWindowWidth());
   useEffect(() => {
     function handleWindowResize() {
@@ -26,8 +30,9 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
   }, []);
 
   function participate() {
-    let user: string = auth.currentUser?.uid!;
-    if (user) {
+    let user: string;
+    if (auth.currentUser?.uid) {
+      user = auth.currentUser?.uid;
       if (lesson.participants) {
         if (lesson.participants.find((id) => id === user)) {
           const index = lesson.participants.indexOf(user);
@@ -38,9 +43,10 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
           lesson.participants.push(user);
         }
       } else {
+        // eslint-disable-next-line
         lesson.participants = [user];
       }
-      var dbLesson = {
+      const dbLesson = {
         id: lesson.id,
         date: lesson.date?.format("DD/MM/YYYY"),
         type: lesson.type,
@@ -48,15 +54,18 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
         expired: lesson.expired,
         participants: lesson.participants,
       };
-      set(ref(db, "lessons/" + (lesson.id as Key)), dbLesson);
+      set(ref(db, `lessons/${lesson.id as Key}`), dbLesson);
     }
   }
+  const handleParticipateClick = () => {
+    participate();
+  };
 
   return (
     <Card id={lesson.id ? lesson.id.toString() : ""} data-cy="lesson-card">
       <CardMedia
         component="img"
-        image={windowWidth > 500 ? banner_kumite_wide : banner_kumite}
+        image={windowWidth > 500 ? bannerKumiteWide : bannerKumite}
         alt="Image representing lesson type"
       />
       <CardContent>
@@ -65,20 +74,33 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
           variant="h5"
           component="div"
           color={lesson.expired ? "error" : "text.primary"}
-          id={lesson.id + "Id"}
+          id={`${lesson.id}Id`}
         >
-          {lesson.type + " " + lesson.date.format("DD/MM/YYYY") + " " + lesson.location + " " + (lesson.expired ? "Expired" : "")}
+          {`${lesson.type} ${lesson.date.format("DD/MM/YYYY")} ${lesson.location} ${lesson.expired ? "Expired" : ""}`}
         </Typography>
         <Typography gutterBottom variant="h5" component="div" color="text.primary">
           {" "}
-          Participants: {lesson.participants ? lesson.participants.length : 0}
+          Participants:
+          {" "}
+          {lesson.participants ? lesson.participants.length : 0}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          On {lesson.date.format("DD/MM/YYYY")} there will be a {lesson.type} training in the dojo located in {lesson.location}.
+          On
+          {" "}
+          {lesson.date.format("DD/MM/YYYY")}
+          {" "}
+          there will be a
+          {" "}
+          {lesson.type}
+          {" "}
+          training in the dojo located in
+          {" "}
+          {lesson.location}
+          .
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="inherit" onClick={participate}>
+        <Button size="small" color="inherit" onClick={handleParticipateClick}>
           Participate
         </Button>
         <Button
@@ -93,9 +115,4 @@ export const LessonCard = ({ lesson, deleteLesson }: LessonCardProps) => {
       </CardActions>
     </Card>
   );
-};
-
-function getWindowWidth() {
-  const { innerWidth } = window;
-  return innerWidth;
 }

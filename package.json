@@ -6,14 +6,38 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "eject": "react-scripts eject",
+    "lint": "npx eslint . --fix",
     "test": "react-scripts test",
     "test-cy": "npx cypress run -b chrome --e2e -P e2e --record --key 83188b6b-2bbd-4fd1-92da-8661362866a1"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
-    ]
+      "react-app/jest",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended",
+      "eslint-config-airbnb"
+    ],
+    "rules": {
+      "quotes": [
+        "error",
+        "double"
+      ],
+      "import/no-extraneous-dependencies": [
+        "error",
+        {
+          "devDependencies": true
+        }
+      ],
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".tsx"
+          ]
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
@@ -54,6 +78,12 @@
   "devDependencies": {
     "@cypress/xpath": "^2.0.3",
     "cypress": "^12.2.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-cypress": "^2.14.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.33.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "wait-on": "^7.0.1"
   }
 }

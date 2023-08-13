@@ -1,5 +1,5 @@
 describe("app landing experience", () => {
-  it("As a user I can acess the home page", function () {
+  it("As a user I can acess the home page", () => {
     cy.visit("home");
     cy.url().should("equal", "http://localhost:3000/home");
   });
@@ -9,16 +9,16 @@ describe("app landing experience", () => {
     cy.url().should("equal", "http://localhost:3000/");
   });
 
-  it("As a user I can acess the login page", function () {
+  it("As a user I can acess the login page", () => {
     cy.visit("Login");
     cy.url().should("equal", "http://localhost:3000/Login");
   });
-  it("As a user I can acess the register page", function () {
+  it("As a user I can acess the register page", () => {
     cy.visit("register");
     cy.url().should("equal", "http://localhost:3000/register");
   });
 
-  it("As a user I am redirected to the login page when trying to acess features requireing authentication", function () {
+  it("As a user I am redirected to the login page when trying to acess features requireing authentication", () => {
     cy.visit("lessons");
     cy.url().should("equal", "http://localhost:3000/Login");
   });

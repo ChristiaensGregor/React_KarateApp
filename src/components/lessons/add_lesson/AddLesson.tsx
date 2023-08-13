@@ -1,4 +1,5 @@
-import { Key, useState } from "react";
+import React, { Key, useState } from "react";
+
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -10,18 +11,21 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { AddLessonProps } from "./AddLessonProps";
 import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-//import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-//import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { AddLessonProps } from "./AddLessonProps.tsx";
+// import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
+// import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import "dayjs/locale/nl-be";
 
-export const AddLesson = ({ setLesson }: AddLessonProps) => {
+export default function AddLesson({ setLesson }: AddLessonProps) {
   const [open, setOpen] = useState(false);
+  const [type, setType] = useState("");
+  const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
+  const [location, setLocation] = useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,33 +37,28 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
 
   const handleAdd = () => {
     setOpen(false);
-    const id: Key = "KarateLesson" + type + date?.format("DDMMYYYY");
-    var day = new Date();
+    const id: Key = `KarateLesson${type}${date?.format("DDMMYYYY")}`;
+    const day = new Date();
     day.setDate(day.getDate() - 1);
     setLesson(id, {
-      id: id,
+      id,
       date: date?.format("DD/MM/YYYY") ?? dayjs(new Date()).format("DD/MM/YYYY"),
-      type: type,
-      location: location,
+      type,
+      location,
       expired: !date?.isAfter(dayjs(day)),
       participants: [],
     });
   };
 
-  const [type, setType] = useState("");
-
   const handleTypeChange = (event: SelectChangeEvent) => {
     setType(event.target.value as string);
   };
-
-  const [location, setLocation] = useState("");
 
   const handleLocationChange = (event: SelectChangeEvent) => {
     setLocation(event.target.value as string);
   };
 
   const locale = "nl-be";
-  const [date, setDate] = useState<Dayjs | null>(dayjs(new Date()));
 
   const handleDateChange = (newValue: Dayjs | null) => {
     setDate(newValue);
@@ -73,7 +72,9 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Add a new Lesson</DialogTitle>
         <DialogContent>
-          <DialogContentText>Create a new lesson by providing a date and a lesson type</DialogContentText>
+          <DialogContentText>
+            Create a new lesson by providing a date and a lesson type
+          </DialogContentText>
           <br />
           <Box sx={{ minWidth: 120 }}>
             <FormControl fullWidth>
@@ -85,10 +86,10 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
                 label="Style"
                 onChange={handleTypeChange}
               >
-                <MenuItem value={"Standard"}>Standard</MenuItem>
-                <MenuItem value={"Kumite"}>Kumite</MenuItem>
-                <MenuItem value={"Kihon"}>Kihon</MenuItem>
-                <MenuItem value={"Kobudo"}>Kobudo</MenuItem>
+                <MenuItem value="Standard">Standard</MenuItem>
+                <MenuItem value="Kumite">Kumite</MenuItem>
+                <MenuItem value="Kihon">Kihon</MenuItem>
+                <MenuItem value="Kobudo">Kobudo</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -103,8 +104,8 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
                 label="Location"
                 onChange={handleLocationChange}
               >
-                <MenuItem value={"Maria-Aalter"}>Maria-Aalter</MenuItem>
-                <MenuItem value={"Wingene"}>Wingene</MenuItem>
+                <MenuItem value="Maria-Aalter">Maria-Aalter</MenuItem>
+                <MenuItem value="Wingene">Wingene</MenuItem>
               </Select>
             </FormControl>
           </Box>
@@ -115,7 +116,9 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
               inputFormat="DD/MM/YYYY"
               value={date}
               onChange={handleDateChange}
-              renderInput={(params) => <TextField {...params} />}
+              renderInput={(params) => (
+                <TextField label={params.label} placeholder={params.placeholder} />
+              )}
             />
           </LocalizationProvider>
         </DialogContent>
@@ -130,4 +133,4 @@ export const AddLesson = ({ setLesson }: AddLessonProps) => {
       </Dialog>
     </>
   );
-};
+}

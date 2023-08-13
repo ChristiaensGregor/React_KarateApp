@@ -2,9 +2,9 @@ import { Key } from "react";
 
 export interface DbLessonInterface {
   id: Key;
-  date: String;
-  type: String;
-  location: String;
-  expired: Boolean;
-  participants: String[];
+  date: string;
+  type: string;
+  location: string;
+  expired: boolean;
+  participants: string[];
 }

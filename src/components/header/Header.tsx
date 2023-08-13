@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import "./Header.css";
 import AppBar from "@mui/material/AppBar";
@@ -14,44 +14,20 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-import { Colorcontext } from "../../domain/ColorContext";
-import { auth } from "../../domain/FireBaseConfig";
 import { useTheme } from "@mui/material/styles";
+import { Colorcontext } from "../../domain/ColorContext.tsx";
+import { auth } from "../../domain/FireBaseConfig.tsx";
 
 const pages = ["lessons"];
 const settings = ["theme", "login", "logout"];
 
-const Header = () => {
-  let navigate = useNavigate();
+function Header() {
+  const navigate = useNavigate();
   const colorMode = useContext(Colorcontext);
   const theme = useTheme();
 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
-
-  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = (page: String) => {
-    setAnchorElNav(null);
-    navigate("/" + page);
-  };
-
-  const handleCloseUserMenu = (setting: String) => {
-    setAnchorElUser(null);
-    if (setting === "theme") {
-      colorMode.toggleMode();
-    } else if (setting === "login") {
-      navigate("/Login");
-    } else if ((setting = "logout")) {
-      logout();
-      navigate("/");
-    }
-  };
 
   const logout = async () => {
     auth.signOut();
@@ -61,6 +37,29 @@ const Header = () => {
     navigate("/");
   };
 
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget);
+  };
+  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElUser(event.currentTarget);
+  };
+
+  const handleCloseNavMenu = (page: string) => {
+    setAnchorElNav(null);
+    navigate(`/${page}`);
+  };
+
+  const handleCloseUserMenu = (setting: string) => {
+    setAnchorElUser(null);
+    if (setting === "theme") {
+      colorMode.toggleMode();
+    } else if (setting === "login") {
+      navigate("/Login");
+    } else if (setting === "logout") {
+      logout();
+      navigate("/");
+    }
+  };
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -114,18 +113,14 @@ const Header = () => {
               }}
             >
               {pages.map((page) => (
-                <MenuItem
-                  key={page}
-                  onClick={() => handleCloseNavMenu(page)}
-                  data-cy={"navigation-hamburger-" + page + "-button"}
-                >
+                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} data-cy={`navigation-hamburger-${page}-button`}>
                   <Typography
                     textAlign="center"
                     sx={{
                       color: "inherit",
                       textDecoration: "none",
                     }}
-                    data-cy={"navigation-hamburger-" + page + "-button"}
+                    data-cy={`navigation-hamburger-${page}-button`}
                   >
                     {page}
                   </Typography>
@@ -158,7 +153,7 @@ const Header = () => {
                 key={page}
                 onClick={() => handleCloseNavMenu(page)}
                 sx={{ my: 2, color: "white", display: "block" }}
-                data-cy={"navigation-" + page + "-button"}
+                data-cy={`navigation-${page}-button`}
               >
                 {page}
               </Button>
@@ -191,10 +186,10 @@ const Header = () => {
                 <MenuItem
                   key={setting}
                   onClick={() => handleCloseUserMenu(setting)}
-                  data-cy={"navigation-setting-" + setting + "-button"}
+                  data-cy={`navigation-setting-${setting}-button`}
                 >
                   <Typography textAlign="center">
-                    {setting === "theme" ? "Switch to " + (theme.palette.mode === "dark" ? "light" : "dark") : setting}
+                    {setting === "theme" ? `Switch to ${theme.palette.mode === "dark" ? "light" : "dark"}` : setting}
                   </Typography>
                 </MenuItem>
               ))}
@@ -204,6 +199,6 @@ const Header = () => {
       </Container>
     </AppBar>
   );
-};
+}
 
 export default Header;

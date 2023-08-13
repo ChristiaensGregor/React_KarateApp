@@ -1,38 +1,46 @@
-import { useEffect, Key, useState, useCallback, useRef } from "react";
-import { ref, set, remove, onValue } from "firebase/database";
-import { LessonInterface } from "../../../domain/LessonInterface";
-import { DbLessonInterface } from "../../../domain/DbLessonInterface";
-import { LessonCard } from "../index";
-import { AddLesson } from "../index";
-import { db } from "../../../domain/FireBaseConfig";
+import React, {
+  useEffect, Key, useState, useCallback, useRef,
+} from "react";
+import {
+  ref, set, remove, onValue,
+} from "firebase/database";
 import dayjs from "dayjs";
 import Paper from "@mui/material/Paper";
+import { LessonInterface } from "../../../domain/LessonInterface.tsx";
+import { DbLessonInterface } from "../../../domain/DbLessonInterface.tsx";
+import AddLesson from "../add_lesson/AddLesson.tsx";
+import LessonCard from "../lesson_card/LessonCard.tsx";
+import { db } from "../../../domain/FireBaseConfig.tsx";
 import "./LessonList.css";
 
-export const LessonList = () => {
+export default function LessonList() {
   const [lessons, setLessons] = useState<LessonInterface[]>([]);
   const initRef = useRef(false);
+  const handleSetLesson = useCallback((lessonId: Key, lesson: DbLessonInterface) => {
+    set(ref(db, `lessons/${lessonId}`), lesson);
+  }, []);
+
   const getLessons = useCallback(() => {
     const init = initRef.current;
     if (!init) {
       const lessonsRef = ref(db, "lessons");
       onValue(lessonsRef, (snapshot) => {
         const data = snapshot.val();
-        var dbLessons: LessonInterface[] = [];
+        let dbLessons: LessonInterface[] = [];
         Object.values(data).forEach((dataLesson: any) => {
           const lesson: LessonInterface = {
             id: dataLesson.id as string,
             date: dayjs(dataLesson.date, "DD/MM/YYYY"),
             type: dataLesson.type as string,
             location: dataLesson.location as string,
-            expired: dataLesson.expired as Boolean,
+            expired: dataLesson.expired as boolean,
             participants: dataLesson.participants ? (dataLesson.participants as string[]) : [],
           };
-          var day = new Date();
+          const day = new Date();
           day.setDate(day.getDate() - 1);
           if (!lesson.date.isAfter(dayjs(day)) && lesson.expired === false) {
-            console.log("Setting " + lesson.id + " to expired");
-            setLesson(lesson.id, {
+            console.log(`Setting ${lesson.id} to expired`);
+            handleSetLesson(lesson.id, {
               id: lesson.id,
               date: lesson.date.format("DD/MM/YYYY"),
               type: lesson.type,
@@ -54,13 +62,13 @@ export const LessonList = () => {
     getLessons();
   }, [getLessons]);
 
-  function setLesson(lessonId: Key, lesson: DbLessonInterface) {
-    set(ref(db, "lessons/" + lessonId), lesson);
+  function deleteLesson(lessonId: Key) {
+    remove(ref(db, `lessons/${lessonId}`));
   }
 
-  function deleteLesson(lessonId: Key) {
-    remove(ref(db, "lessons/" + lessonId));
-  }
+  const handleDeleteClick = (lessonId: Key) => {
+    deleteLesson(lessonId);
+  };
 
   return (
     <>
@@ -68,15 +76,13 @@ export const LessonList = () => {
         <h4 className="title" data-cy="lesson-list-title">
           List Lessons
         </h4>
-        <AddLesson setLesson={setLesson} />
+        <AddLesson setLesson={handleSetLesson} />
       </Paper>
-      {lessons.map((lesson) => {
-        return (
-          <div className="wrapper" key={lesson.id}>
-            <LessonCard lesson={lesson} deleteLesson={deleteLesson} />
-          </div>
-        );
-      })}
+      {lessons.map((lesson) => (
+        <div className="wrapper" key={lesson.id}>
+          <LessonCard lesson={lesson} deleteLesson={handleDeleteClick} />
+        </div>
+      ))}
     </>
   );
-};
+}

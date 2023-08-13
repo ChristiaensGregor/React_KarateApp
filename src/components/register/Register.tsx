@@ -8,16 +8,18 @@ import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
-import { auth } from "../../domain/FireBaseConfig";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { onAuthStateChanged, User } from "firebase/auth";
-//import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
+import { auth } from "../../domain/FireBaseConfig.tsx";
+// import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
-const Register = () => {
-  let navigate = useNavigate();
+function Register() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User>();
   onAuthStateChanged(auth, (currentUser) => {
-    setUser(currentUser!);
+    if (currentUser) {
+      setUser(currentUser);
+    }
   });
 
   const register = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,10 +29,10 @@ const Register = () => {
     const password = data.get("password") as string;
     if (email !== null && password !== null) {
       try {
-        //const user = await createUserWithEmailAndPassword(auth, email, password);
+        // const user = await createUserWithEmailAndPassword(auth, email, password);
         navigate("/");
       } catch (error) {
-        console.log("Register error");
+        // console.log('Register error');
       }
     }
   };
@@ -76,10 +78,10 @@ const Register = () => {
             Register
           </Button>
           <Grid container>
-            <Grid item xs></Grid>
+            <Grid item xs />
             <Grid item>
               <Link component={RouterLink} to="/Login" variant="body2">
-                {"Already have an account? Sign in"}
+                Already have an account? Sign in
               </Link>
             </Grid>
           </Grid>
@@ -88,6 +90,6 @@ const Register = () => {
       <h3>{user?.email}</h3>
     </>
   );
-};
+}
 
 export default Register;

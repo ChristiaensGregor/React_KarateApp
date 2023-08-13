@@ -1,12 +1,12 @@
-import {defineConfig} from 'cypress'
+import { defineConfig } from "cypress";
 
-module.exports = defineConfig({
+export default defineConfig({
   projectId: "aj3a25",
   e2e: {
     baseUrl: "http://localhost:3000/",
     retries: 2,
     video: false,
     screenshotOnRunFailure: true,
-    experimentalRunAllSpecs:true
+    experimentalRunAllSpecs: true,
   },
 });

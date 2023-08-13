@@ -1,17 +1,17 @@
 import "./App.css";
+import React, { useMemo, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useMemo, useState } from "react";
 import { ThemeProvider } from "@mui/material/styles";
-import { darkTheme, lightTheme } from "../domain/Theme";
 import { createTheme, PaletteMode } from "@mui/material";
-import { Colorcontext } from "../domain/ColorContext";
 import Paper from "@mui/material/Paper";
-import Header from "./header/Header";
-import HomePage from "./home_page/HomePage";
-import Login from "./login/Login";
-import { LessonList } from "./lessons/index";
-import Register from "./register/Register";
-import { RouteGuard } from "../domain/RouteGuard";
+import { darkTheme, lightTheme } from "../domain/Theme.tsx";
+import { Colorcontext } from "../domain/ColorContext.tsx";
+import Header from "./header/Header.tsx";
+import HomePage from "./home_page/HomePage.tsx";
+import Login from "./login/Login.tsx";
+import LessonList from "./lessons/lesson_list/LessonList.tsx";
+import Register from "./register/Register.tsx";
+import RouteGuard from "../domain/RouteGuard.tsx";
 
 function App() {
   const [mode, setMode] = useState<PaletteMode>("dark");
@@ -21,7 +21,7 @@ function App() {
         setMode((prevMode: PaletteMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    []
+    [],
   );
   const theme = useMemo(() => createTheme(mode === "light" ? lightTheme : darkTheme), [mode]);
   return (

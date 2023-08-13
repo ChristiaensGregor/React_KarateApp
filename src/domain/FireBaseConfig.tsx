@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
-import { firebaseOptions } from "./FireBaseOptions";
 import { getAuth } from "firebase/auth";
+import firebaseOptions from "./FireBaseOptions.tsx";
 
 const app = initializeApp(firebaseOptions);
 

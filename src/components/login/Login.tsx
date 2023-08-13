@@ -10,16 +10,16 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "../../domain/FireBaseConfig";
+import { auth } from "../../domain/FireBaseConfig.tsx";
 
-const Login = () => {
-  let navigate = useNavigate();
+function Login() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>();
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setUser(user);
+    onAuthStateChanged(auth, (newUser) => {
+      if (newUser) {
+        setUser(newUser);
       } else {
         setUser(null);
       }
@@ -33,14 +33,21 @@ const Login = () => {
 
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (email !== null && email !== undefined && email !== "" && password !== null && password !== undefined && password !== "") {
+    if (
+      email !== null
+      && email !== undefined
+      && email !== ""
+      && password !== null
+      && password !== undefined
+      && password !== ""
+    ) {
       try {
         setEmailError("");
         setPasswordError("");
         signInWithEmailAndPassword(auth, email, password);
         navigate("/");
       } catch (error) {
-        console.error(error);
+        // console.error(error);
       }
     } else if (email === null || email === undefined || email === "") {
       setEmailError("Please enter a valid email address.");
@@ -72,7 +79,7 @@ const Login = () => {
             id="email"
             name="email"
             label="Email Address"
-            type={"email"}
+            type="email"
             autoComplete="email"
             margin="normal"
             required
@@ -80,7 +87,7 @@ const Login = () => {
             autoFocus
             value={email}
             onChange={(e: any) => setEmail(e.target.value)}
-            error={emailError === null || emailError === "" ? false : true}
+            error={!(emailError === null || emailError === "")}
             helperText={emailError}
             data-cy="login-Email-field"
           />
@@ -95,22 +102,34 @@ const Login = () => {
             fullWidth
             value={password}
             onChange={(e: any) => setPassword(e.target.value)}
-            error={passwordError === null || passwordError === "" ? false : true}
+            error={!(passwordError === null || passwordError === "")}
             helperText={passwordError}
             data-cy="login-Password-field"
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="login_login" data-cy="login-Login-button">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            id="login_login"
+            data-cy="login-Login-button"
+          >
             Sign In
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link href="google.com" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
-              <Link component={RouterLink} to="/Register" variant="body2" id="login_register_prompt">
-                {"Don't have an account? Sign Up"}
+              <Link
+                component={RouterLink}
+                to="/Register"
+                variant="body2"
+                id="login_register_prompt"
+              >
+                Don&#39;t have an account? Sign Up
               </Link>
             </Grid>
           </Grid>
@@ -119,6 +138,6 @@ const Login = () => {
       </Box>
     </>
   );
-};
+}
 
 export default Login;

@@ -1,11 +1,11 @@
-import { homePage, Navigation, Settings } from "../pages/HomePage";
+import { homePage, Navigation, Settings } from "../pages/HomePage.ts";
 
 describe("app navigation new user", () => {
   beforeEach(() => {
     cy.visit("");
   });
 
-  it("As a user i should be able to click on the app logo to navigate home", function () {
+  it("As a user i should be able to click on the app logo to navigate home", () => {
     cy.log(homePage.NavigationButton(Navigation.HOME));
     cy.get(homePage.NavigationButton(Navigation.HOME)).first().click();
     cy.url().should("equal", "http://localhost:3000/");
@@ -15,7 +15,7 @@ describe("app navigation new user", () => {
     cy.url().should("equal", "http://localhost:3000/");
   });
 
-  it("As a user i should be able to click on lessons in the navigation menu", function () {
+  it("As a user i should be able to click on lessons in the navigation menu", () => {
     cy.get(homePage.NavigationButton(Navigation.LESSONS))
       .should("be.visible")
       .should("have.text", "lessons")
@@ -24,7 +24,7 @@ describe("app navigation new user", () => {
     cy.url().should("equal", "http://localhost:3000/Login");
   });
 
-  it("As a user i should be able to click on Profile in the navigation menu", function () {
+  it("As a user i should be able to click on Profile in the navigation menu", () => {
     cy.get(".MuiAvatar-root").should("be.visible");
     cy.get(".MuiAvatar-root").click();
     cy.get(homePage.SettingsButton(Settings.THEME)).should("be.visible");
@@ -36,7 +36,7 @@ describe("app navigation new user", () => {
     cy.get(homePage.SettingsButton(Settings.LOGOUT)).should("not.be.visible");
   });
 
-  it("As a user i should be able to switch from light to dark theme using the setting under the settings menu", function () {
+  it("As a user i should be able to switch from light to dark theme using the setting under the settings menu", () => {
     cy.visit("http://localhost:3000/");
     cy.get(".MuiAvatar-root").click();
     cy.get(homePage.SettingsButton(Settings.THEME)).should("have.text", "Switch to light").click();

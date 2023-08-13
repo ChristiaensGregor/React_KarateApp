@@ -86,6 +86,7 @@ function Login() {
             fullWidth
             autoFocus
             value={email}
+            // eslint-disable-next-line
             onChange={(e: any) => setEmail(e.target.value)}
             error={!(emailError === null || emailError === "")}
             helperText={emailError}
@@ -101,6 +102,7 @@ function Login() {
             required
             fullWidth
             value={password}
+            // eslint-disable-next-line
             onChange={(e: any) => setPassword(e.target.value)}
             error={!(passwordError === null || passwordError === "")}
             helperText={passwordError}

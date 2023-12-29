@@ -34,12 +34,12 @@ function Login() {
   const login = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
-      email !== null
-      && email !== undefined
-      && email !== ""
-      && password !== null
-      && password !== undefined
-      && password !== ""
+      email !== null &&
+      email !== undefined &&
+      email !== "" &&
+      password !== null &&
+      password !== undefined &&
+      password !== ""
     ) {
       try {
         setEmailError("");
@@ -71,10 +71,18 @@ function Login() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography
+          component="h1"
+          variant="h5"
+        >
           Sign in
         </Typography>
-        <Box component="form" onSubmit={login} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={login}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             id="email"
             name="email"
@@ -119,8 +127,14 @@ function Login() {
             Sign In
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="google.com" variant="body2">
+            <Grid
+              item
+              xs
+            >
+              <Link
+                href="google.com"
+                variant="body2"
+              >
                 Forgot password?
               </Link>
             </Grid>
@@ -136,7 +150,7 @@ function Login() {
             </Grid>
           </Grid>
         </Box>
-        <h3>{user?.email}</h3>
+        <h3 data-cy="login-user-email">{user?.email}</h3>
       </Box>
     </>
   );

@@ -5,6 +5,7 @@
     "types": ["cypress", "node"],
     "isolatedModules": false,
     "noEmit": true,
+    "allowImportingTsExtensions":true
   },
   "include": ["**/*.ts"]
 }

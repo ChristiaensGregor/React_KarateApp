@@ -11,31 +11,10 @@
     "test-cy": "npx cypress run -b chrome --e2e -P e2e --record --key 83188b6b-2bbd-4fd1-92da-8661362866a1"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest",
-      "plugin:@typescript-eslint/recommended",
-      "plugin:react/recommended",
-      "eslint-config-airbnb"
-    ],
     "rules": {
       "quotes": [
         "error",
         "double"
-      ],
-      "import/no-extraneous-dependencies": [
-        "error",
-        {
-          "devDependencies": true
-        }
-      ],
-      "react/jsx-filename-extension": [
-        "error",
-        {
-          "extensions": [
-            ".tsx"
-          ]
-        }
       ]
     }
   },

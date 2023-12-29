@@ -21,23 +21,41 @@ function App() {
         setMode((prevMode: PaletteMode) => (prevMode === "light" ? "dark" : "light"));
       },
     }),
-    [],
+    []
   );
   const theme = useMemo(() => createTheme(mode === "light" ? lightTheme : darkTheme), [mode]);
   return (
     <ThemeProvider theme={theme}>
-      <Paper className="app" elevation={0}>
+      <Paper
+        className="app"
+        elevation={0}
+      >
         <Colorcontext.Provider value={colorMode}>
           <Header />
         </Colorcontext.Provider>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/"
+            element={<HomePage />}
+          />
           <Route element={<RouteGuard />}>
-            <Route path="/Lessons" element={<LessonList />} />
+            <Route
+              path="/Lessons"
+              element={<LessonList />}
+            />
           </Route>
-          <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
-          <Route path="/*" element={<Navigate to="/" />} />
+          <Route
+            path="/Login"
+            element={<Login />}
+          />
+          <Route
+            path="/Register"
+            element={<Register />}
+          />
+          <Route
+            path="/*"
+            element={<Navigate to="/" />}
+          />
         </Routes>
       </Paper>
     </ThemeProvider>

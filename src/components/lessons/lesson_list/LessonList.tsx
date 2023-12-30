@@ -1,16 +1,12 @@
-import React, {
-  useEffect, Key, useState, useCallback, useRef,
-} from "react";
-import {
-  ref, set, remove, onValue,
-} from "firebase/database";
+import React, { useEffect, Key, useState, useCallback, useRef } from "react";
+import { ref, set, remove, onValue } from "firebase/database";
 import dayjs from "dayjs";
 import Paper from "@mui/material/Paper";
-import { LessonInterface } from "../../../domain/LessonInterface.tsx";
-import { DbLessonInterface } from "../../../domain/DbLessonInterface.tsx";
-import AddLesson from "../add_lesson/AddLesson.tsx";
-import LessonCard from "../lesson_card/LessonCard.tsx";
-import { db } from "../../../domain/FireBaseConfig.tsx";
+import { LessonInterface } from "../../../domain/LessonInterface";
+import { DbLessonInterface } from "../../../domain/DbLessonInterface";
+import AddLesson from "../add_lesson/AddLesson";
+import LessonCard from "../lesson_card/LessonCard";
+import { db } from "../../../domain/FireBaseConfig";
 import "./LessonList.css";
 
 export default function LessonList() {
@@ -73,15 +69,27 @@ export default function LessonList() {
 
   return (
     <>
-      <Paper className="banner" elevation={1}>
-        <h4 className="title" data-cy="lesson-list-title">
+      <Paper
+        className="banner"
+        elevation={1}
+      >
+        <h4
+          className="title"
+          data-cy="lesson-list-title"
+        >
           List Lessons
         </h4>
         <AddLesson setLesson={handleSetLesson} />
       </Paper>
       {lessons.map((lesson) => (
-        <div className="wrapper" key={lesson.id}>
-          <LessonCard lesson={lesson} deleteLesson={handleDeleteClick} />
+        <div
+          className="wrapper"
+          key={lesson.id}
+        >
+          <LessonCard
+            lesson={lesson}
+            deleteLesson={handleDeleteClick}
+          />
         </div>
       ))}
     </>

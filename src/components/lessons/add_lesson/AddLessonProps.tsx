@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { DbLessonInterface } from "../../../domain/DbLessonInterface.tsx";
+import { DbLessonInterface } from "../../../domain/DbLessonInterface";
 
 export interface AddLessonProps {
   // eslint-disable-next-line

@@ -9,8 +9,8 @@ import Typography from "@mui/material/Typography";
 import { ref, set } from "firebase/database";
 import bannerKumite from "../../../resources/bannerKumite.png";
 import bannerKumiteWide from "../../../resources/bannerKumiteWide.png";
-import { LessonCardProps } from "./LessonCardProps.tsx";
-import { db, auth } from "../../../domain/FireBaseConfig.tsx";
+import { LessonCardProps } from "./LessonCardProps";
+import { db, auth } from "../../../domain/FireBaseConfig";
 
 export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
   function getWindowWidth() {
@@ -62,7 +62,10 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
   };
 
   return (
-    <Card id={lesson.id ? lesson.id.toString() : ""} data-cy="lesson-card">
+    <Card
+      id={lesson.id ? lesson.id.toString() : ""}
+      data-cy="lesson-card"
+    >
       <CardMedia
         component="img"
         image={windowWidth > 500 ? bannerKumiteWide : bannerKumite}
@@ -76,31 +79,33 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
           color={lesson.expired ? "error" : "text.primary"}
           id={`${lesson.id}Id`}
         >
-          {`${lesson.type} ${lesson.date.format("DD/MM/YYYY")} ${lesson.location} ${lesson.expired ? "Expired" : ""}`}
+          {`${lesson.type} ${lesson.date.format("DD/MM/YYYY")} ${lesson.location} ${
+            lesson.expired ? "Expired" : ""
+          }`}
         </Typography>
-        <Typography gutterBottom variant="h5" component="div" color="text.primary">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          color="text.primary"
+        >
           {" "}
-          Participants:
-          {" "}
-          {lesson.participants ? lesson.participants.length : 0}
+          Participants: {lesson.participants ? lesson.participants.length : 0}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          On
-          {" "}
-          {lesson.date.format("DD/MM/YYYY")}
-          {" "}
-          there will be a
-          {" "}
-          {lesson.type}
-          {" "}
-          training in the dojo located in
-          {" "}
-          {lesson.location}
-          .
+        <Typography
+          variant="body2"
+          color="text.secondary"
+        >
+          On {lesson.date.format("DD/MM/YYYY")} there will be a {lesson.type} training in the dojo
+          located in {lesson.location}.
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small" color="inherit" onClick={handleParticipateClick}>
+        <Button
+          size="small"
+          color="inherit"
+          onClick={handleParticipateClick}
+        >
           Participate
         </Button>
         <Button

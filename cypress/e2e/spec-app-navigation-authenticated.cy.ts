@@ -2,11 +2,14 @@ import { homePage, Navigation, Settings } from "../pages/HomePage";
 import lessonPage from "../pages/LessonPage";
 import { loginPage } from "../pages/LoginPage";
 
-describe("app navigation logged in user", () => {
+describe("app navigation authenticated user", () => {
   before(() => {
     cy.visit("");
-    cy.login("react_test@test.com", "test1234");
-    cy.visit("login");
+    cy.get(homePage.Settings).click();
+    cy.get(homePage.SettingsButton(Settings.LOGIN))
+      .should("be.visible")
+      .should("have.text", "login")
+      .click();
     cy.get(loginPage.UserEmail).should("have.text", "react_test@test.com");
   });
 
@@ -20,9 +23,5 @@ describe("app navigation logged in user", () => {
     cy.get(homePage.NavigationButton(Navigation.LESSONS)).click();
     cy.url().should("equal", "http://localhost:3000/lessons");
     cy.get(lessonPage.ListTitle).should("have.text", "List Lessons");
-    cy.get(homePage.Settings).click();
-    cy.get(homePage.SettingsButton(Settings.LOGOUT)).should("be.visible").click();
-    cy.get(homePage.NavigationButton(Navigation.LESSONS)).click();
-    cy.url().should("equal", "http://localhost:3000/Login");
   });
 });

@@ -5,8 +5,7 @@ import { loginPage } from "../pages/LoginPage";
 describe("Lessons page", () => {
   before(() => {
     cy.visit("");
-    cy.login("react_test@test.com", "test1234");
-    cy.get(".MuiAvatar-root").click();
+    cy.get(homePage.Settings).click();
     cy.get(homePage.SettingsButton(Settings.LOGIN))
       .should("be.visible")
       .should("have.text", "login")

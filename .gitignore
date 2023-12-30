@@ -6,7 +6,7 @@ FireBaseOptions.tsx
 e2e/node_modules
 # testing
 /coverage
-/e2e/cypress/downloads
-/e2e/cypress/screenshots
+/cypress/downloads
+/cypress/screenshots
 # production
 /build

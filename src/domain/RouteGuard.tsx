@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet, Navigate } from "react-router-dom";
-import { auth } from "./FireBaseConfig.tsx";
+import { auth } from "./FireBaseConfig";
 
 const useAuth = (): boolean => auth !== null && auth.currentUser !== null;
 

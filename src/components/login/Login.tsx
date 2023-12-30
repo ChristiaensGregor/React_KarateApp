@@ -10,7 +10,7 @@ import Link from "@mui/material/Link";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { signInWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "../../domain/FireBaseConfig.tsx";
+import { auth } from "../../domain/FireBaseConfig";
 
 function Login() {
   const navigate = useNavigate();

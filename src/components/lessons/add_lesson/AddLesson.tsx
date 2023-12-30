@@ -16,7 +16,7 @@ import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
-import { AddLessonProps } from "./AddLessonProps.tsx";
+import { AddLessonProps } from "./AddLessonProps";
 // import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
 // import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import "dayjs/locale/nl-be";
@@ -66,10 +66,17 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
 
   return (
     <>
-      <Button variant="outlined" onClick={handleClickOpen} color="inherit">
+      <Button
+        variant="outlined"
+        onClick={handleClickOpen}
+        color="inherit"
+      >
         Add Lesson
       </Button>
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+      >
         <DialogTitle>Add a new Lesson</DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -110,23 +117,35 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
             </FormControl>
           </Box>
           <br />
-          <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={locale}>
+          <LocalizationProvider
+            dateAdapter={AdapterDayjs}
+            adapterLocale={locale}
+          >
             <DesktopDatePicker
               label="Date desktop"
               inputFormat="DD/MM/YYYY"
               value={date}
               onChange={handleDateChange}
               renderInput={(params) => (
-                <TextField label={params.label} placeholder={params.placeholder} />
+                <TextField
+                  label={params.label}
+                  placeholder={params.placeholder}
+                />
               )}
             />
           </LocalizationProvider>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="inherit">
+          <Button
+            onClick={handleClose}
+            color="inherit"
+          >
             Cancel
           </Button>
-          <Button onClick={handleAdd} color="inherit">
+          <Button
+            onClick={handleAdd}
+            color="inherit"
+          >
             Add
           </Button>
         </DialogActions>

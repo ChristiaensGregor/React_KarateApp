@@ -10,7 +10,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 import { onAuthStateChanged, User } from "firebase/auth";
-import { auth } from "../../domain/FireBaseConfig.tsx";
+import { auth } from "../../domain/FireBaseConfig";
 // import { createUserWithEmailAndPassword, onAuthStateChanged, User } from "firebase/auth";
 
 function Register() {
@@ -50,10 +50,18 @@ function Register() {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography
+          component="h1"
+          variant="h5"
+        >
           Register
         </Typography>
-        <Box component="form" onSubmit={register} noValidate sx={{ mt: 1 }}>
+        <Box
+          component="form"
+          onSubmit={register}
+          noValidate
+          sx={{ mt: 1 }}
+        >
           <TextField
             margin="normal"
             required
@@ -74,13 +82,26 @@ function Register() {
             id="password"
             autoComplete="current-password"
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }} id="register_register">
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            id="register_register"
+          >
             Register
           </Button>
           <Grid container>
-            <Grid item xs />
+            <Grid
+              item
+              xs
+            />
             <Grid item>
-              <Link component={RouterLink} to="/Login" variant="body2">
+              <Link
+                component={RouterLink}
+                to="/Login"
+                variant="body2"
+              >
                 Already have an account? Sign in
               </Link>
             </Grid>

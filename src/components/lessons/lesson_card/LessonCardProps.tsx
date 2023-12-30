@@ -1,5 +1,5 @@
 import { Key } from "react";
-import { LessonInterface } from "../../../domain/LessonInterface.tsx";
+import { LessonInterface } from "../../../domain/LessonInterface";
 
 export interface LessonCardProps {
   lesson: LessonInterface;

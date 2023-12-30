@@ -15,8 +15,8 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useTheme } from "@mui/material/styles";
-import { Colorcontext } from "../../domain/ColorContext.tsx";
-import { auth } from "../../domain/FireBaseConfig.tsx";
+import { Colorcontext } from "../../domain/ColorContext";
+import { auth } from "../../domain/FireBaseConfig";
 
 const pages = ["lessons"];
 const settings = ["theme", "login", "logout"];
@@ -113,7 +113,11 @@ function Header() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={() => handleCloseNavMenu(page)} data-cy={`navigation-hamburger-${page}-button`}>
+                <MenuItem
+                  key={page}
+                  onClick={() => handleCloseNavMenu(page)}
+                  data-cy={`navigation-hamburger-${page}-button`}
+                >
                   <Typography
                     textAlign="center"
                     sx={{
@@ -162,8 +166,15 @@ function Header() {
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }} data-cy="navigation-setting-button">
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              <IconButton
+                onClick={handleOpenUserMenu}
+                sx={{ p: 0 }}
+                data-cy="navigation-setting-button"
+              >
+                <Avatar
+                  alt="Remy Sharp"
+                  src="/static/images/avatar/2.jpg"
+                />
               </IconButton>
             </Tooltip>
             <Menu
@@ -189,7 +200,9 @@ function Header() {
                   data-cy={`navigation-setting-${setting}-button`}
                 >
                   <Typography textAlign="center">
-                    {setting === "theme" ? `Switch to ${theme.palette.mode === "dark" ? "light" : "dark"}` : setting}
+                    {setting === "theme"
+                      ? `Switch to ${theme.palette.mode === "dark" ? "light" : "dark"}`
+                      : setting}
                   </Typography>
                 </MenuItem>
               ))}

@@ -1,16 +1,32 @@
-import { homePage, Navigation } from "../pages/HomePage.ts";
-import lessonPage from "../pages/LessonPage.ts";
+import { homePage, Navigation, Settings } from "../pages/HomePage";
+import lessonPage from "../pages/LessonPage";
+import { loginPage } from "../pages/LoginPage";
 
 describe("Lessons page", () => {
-  beforeEach(() => {
+  before(() => {
     cy.visit("");
     cy.login("react_test@test.com", "test1234");
-    cy.get(homePage.NavigationButton(Navigation.LESSONS)).click();
+    cy.get(".MuiAvatar-root").click();
+    cy.get(homePage.SettingsButton(Settings.LOGIN))
+      .should("be.visible")
+      .should("have.text", "login")
+      .click();
+    cy.get(loginPage.UserEmail).should("have.text", "react_test@test.com");
+  });
+
+  beforeEach(() => {
+    cy.visit("");
   });
 
   it("The lesson page should display lessons", () => {
+    cy.wait(500);
+    cy.get(homePage.NavigationButton(Navigation.LESSONS))
+      .should("exist")
+      .should("be.visible")
+      .should("have.text", "lessons")
+      .click();
     cy.url().should("contain", "/lessons");
-    cy.get(lessonPage.lessonPage.ListTitle).should("have.text", "List Lessons");
-    cy.get(lessonPage.lessonPage.LessonCards).eq(0).click();
+    cy.get(lessonPage.ListTitle).should("have.text", "List Lessons");
+    cy.get(lessonPage.LessonCards).eq(0).click();
   });
 });

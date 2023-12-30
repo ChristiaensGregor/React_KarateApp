@@ -1,5 +1,5 @@
-import { homePage, Navigation, Settings } from "../pages/HomePage.ts";
-import { loginPage } from "../pages/LoginPage.ts";
+import { homePage, Navigation, Settings } from "../pages/HomePage";
+import { loginPage } from "../pages/LoginPage";
 
 describe("app navigation unauthenticated user", () => {
   before(() => {
@@ -18,7 +18,7 @@ describe("app navigation unauthenticated user", () => {
       .should("be.visible")
       .should("have.text", "login")
       .click();
-    cy.get(loginPage.UserEmail).should("not.exist");
+    cy.get(loginPage.UserEmail).should("not.have.text");
   });
 
   it("As an unauthenticated user I should be able to click on the app logo to navigate home", () => {

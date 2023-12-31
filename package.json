@@ -8,7 +8,7 @@
     "eject": "react-scripts eject",
     "lint": "npx eslint . --fix",
     "test": "react-scripts test",
-    "test-cy": "npx cypress run -b chrome --e2e --record --key 83188b6b-2bbd-4fd1-92da-8661362866a1"
+    "test-cy": "npx cypress run -b chrome --e2e --record --key 83188b6b-2bbd-4fd1-92da-8661362866a1 --headless --browser chrome --config viewportWidth=1000,viewportHeight=660"
   },
   "eslintConfig": {
     "extends": [

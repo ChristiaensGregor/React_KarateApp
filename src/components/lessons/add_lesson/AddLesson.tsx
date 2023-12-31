@@ -15,7 +15,7 @@ import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { AddLessonProps } from "./AddLessonProps";
-import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DesktopDateTimePicker } from "@mui/x-date-pickers";
 import "dayjs/locale/nl-be";
 
 export default function AddLesson({ setLesson }: AddLessonProps) {
@@ -133,7 +133,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
             dateAdapter={AdapterDayjs}
             adapterLocale={locale}
           >
-            <DateTimePicker
+            <DesktopDateTimePicker
               inputFormat="DD/MM/YYYY"
               value={date}
               onChange={handleDateChange}

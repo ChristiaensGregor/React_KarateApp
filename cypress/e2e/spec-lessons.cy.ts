@@ -48,7 +48,7 @@ describe("Lessons page", () => {
     cy.get(lessonPage.AddLessonLocation).should("exist").click();
     cy.get(lessonPage.AddLessonLocationMariaAalter).click();
     const mockDate = "31129999";
-    cy.get(lessonPage.AddLessonDate).clear().type(mockDate);
+    cy.get(lessonPage.AddLessonDate).clear().find("input").type(mockDate);
     cy.get(lessonPage.AddLessonButton)
       .should("exist")
       .should("be.visible")

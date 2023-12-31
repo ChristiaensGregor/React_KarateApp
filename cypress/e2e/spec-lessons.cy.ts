@@ -47,29 +47,30 @@ describe("Lessons page", () => {
     cy.get(lessonPage.AddLessonTypeStandard).click();
     cy.get(lessonPage.AddLessonLocation).should("exist").click();
     cy.get(lessonPage.AddLessonLocationMariaAalter).click();
-    cy.get(lessonPage.AddLessonDate).click().type("31/12/9999");
+    const mockDate = "31129999";
+    cy.get(lessonPage.AddLessonDate).clear().type(mockDate);
     cy.get(lessonPage.AddLessonButton)
       .should("exist")
       .should("be.visible")
       .should("have.text", "Add")
       .click();
-    cy.get("[data-cy='lesson-card-KarateLessonStandard31122023']").should("exist");
-    cy.get("[data-cy='lesson-card-participate-KarateLessonStandard31122023']")
+    cy.get(`[data-cy='lesson-card-KarateLessonStandard${mockDate}']`).should("exist");
+    cy.get(`[data-cy='lesson-card-participate-KarateLessonStandard${mockDate}']`)
       .should("exist")
       .should("be.visible")
       .should("have.text", "Participate")
       .click();
-    cy.get("[data-cy='lesson-card-participants-KarateLessonStandard31122023']")
+    cy.get(`[data-cy='lesson-card-participants-KarateLessonStandard${mockDate}']`)
       .should("exist")
       .should("be.visible")
       .should("have.text", " Participants: 1");
-    cy.get("[data-cy='lesson-card-delete-KarateLessonStandard31122023']")
+    cy.get(`[data-cy='lesson-card-delete-KarateLessonStandard${mockDate}']`)
       .should("exist")
       .should("be.visible")
       .should("have.text", "Delete")
       .click();
     cy.get(homePage.NavigationButton(Navigation.HOME)).first().click();
     cy.get(homePage.NavigationButton(Navigation.LESSONS)).click();
-    cy.get("[data-cy='lesson-card-KarateLessonStandard31122023']").should("not.exist");
+    cy.get(`[data-cy='lesson-card-KarateLessonStandard${mockDate}']`).should("not.exist");
   });
 });

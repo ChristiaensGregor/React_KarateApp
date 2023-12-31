@@ -64,7 +64,7 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
   return (
     <Card
       id={lesson.id ? lesson.id.toString() : ""}
-      data-cy="lesson-card"
+      data-cy={`lesson-card-${lesson.id}`}
     >
       <CardMedia
         component="img"
@@ -88,6 +88,7 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
           variant="h5"
           component="div"
           color="text.primary"
+          data-cy={`lesson-card-participants-${lesson.id}`}
         >
           {" "}
           Participants: {lesson.participants ? lesson.participants.length : 0}
@@ -105,6 +106,7 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
           size="small"
           color="inherit"
           onClick={handleParticipateClick}
+          data-cy={`lesson-card-participate-${lesson.id}`}
         >
           Participate
         </Button>
@@ -114,6 +116,7 @@ export default function LessonCard({ lesson, deleteLesson }: LessonCardProps) {
           onClick={() => {
             deleteLesson(lesson.id);
           }}
+          data-cy={`lesson-card-delete-${lesson.id}`}
         >
           Delete
         </Button>

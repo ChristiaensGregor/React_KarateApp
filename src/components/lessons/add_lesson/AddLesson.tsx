@@ -38,14 +38,18 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
   const handleAdd = () => {
     setOpen(false);
     const id: Key = `KarateLesson${type}${date?.format("DDMMYYYY")}`;
-    const day = new Date();
-    day.setDate(day.getDate() - 1);
+    console.log(date);
+    if (date == null) {
+      console.log(date);
+      const day = new Date();
+      day.setDate(day.getDate() - 1);
+    }
     setLesson(id, {
       id,
       date: date?.format("DD/MM/YYYY") ?? dayjs(new Date()).format("DD/MM/YYYY"),
       type,
       location,
-      expired: !date?.isAfter(dayjs(day)),
+      expired: !date?.isAfter(dayjs(date)),
       participants: [],
     });
   };
@@ -70,6 +74,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
         variant="outlined"
         onClick={handleClickOpen}
         color="inherit"
+        data-cy="lessons-add-lesson-button"
       >
         Add Lesson
       </Button>
@@ -77,7 +82,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
         open={open}
         onClose={handleClose}
       >
-        <DialogTitle>Add a new Lesson</DialogTitle>
+        <DialogTitle data-cy="lessons-add-lesson-card-title">Add a new Lesson</DialogTitle>
         <DialogContent>
           <DialogContentText>
             Create a new lesson by providing a date and a lesson type
@@ -92,8 +97,14 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
                 value={type}
                 label="Style"
                 onChange={handleTypeChange}
+                data-cy="lessons-add-lesson-card-lesson-type"
               >
-                <MenuItem value="Standard">Standard</MenuItem>
+                <MenuItem
+                  value="Standard"
+                  data-cy="lessons-add-lesson-card-lesson-type-standard"
+                >
+                  Standard
+                </MenuItem>
                 <MenuItem value="Kumite">Kumite</MenuItem>
                 <MenuItem value="Kihon">Kihon</MenuItem>
                 <MenuItem value="Kobudo">Kobudo</MenuItem>
@@ -110,8 +121,14 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
                 value={location}
                 label="Location"
                 onChange={handleLocationChange}
+                data-cy="lessons-add-lesson-card-lesson-location"
               >
-                <MenuItem value="Maria-Aalter">Maria-Aalter</MenuItem>
+                <MenuItem
+                  value="Maria-Aalter"
+                  data-cy="lessons-add-lesson-card-lesson-location-mariaaalter"
+                >
+                  Maria-Aalter
+                </MenuItem>
                 <MenuItem value="Wingene">Wingene</MenuItem>
               </Select>
             </FormControl>
@@ -130,6 +147,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
                 <TextField
                   label={params.label}
                   placeholder={params.placeholder}
+                  data-cy="lessons-add-lesson-card-lesson-date"
                 />
               )}
             />
@@ -145,6 +163,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
           <Button
             onClick={handleAdd}
             color="inherit"
+            data-cy="lessons-add-lesson-card-lesson-add"
           >
             Add
           </Button>

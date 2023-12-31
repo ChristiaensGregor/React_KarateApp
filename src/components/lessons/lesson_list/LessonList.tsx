@@ -22,11 +22,10 @@ export default function LessonList() {
     if (!init) {
       const lessonsRef = ref(db, "lessons");
       onValue(lessonsRef, (snapshot) => {
-        const data = snapshot.val();
+        const data: Record<string, LessonInterface> = snapshot.val();
         let dbLessons: LessonInterface[] = [];
-        // eslint-disable-next-line
         if (data != null) {
-          Object.values(data).forEach((dataLesson: any) => {
+          Object.values(data).forEach((dataLesson: LessonInterface) => {
             const lesson: LessonInterface = {
               id: dataLesson.id as string,
               date: dayjs(dataLesson.date, "DD/MM/YYYY"),

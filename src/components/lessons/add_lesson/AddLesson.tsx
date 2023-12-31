@@ -1,5 +1,4 @@
 import React, { Key, useState } from "react";
-
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
@@ -15,10 +14,8 @@ import dayjs, { Dayjs } from "dayjs";
 import TextField from "@mui/material/TextField";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
 import { AddLessonProps } from "./AddLessonProps";
-// import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker";
-// import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import "dayjs/locale/nl-be";
 
 export default function AddLesson({ setLesson }: AddLessonProps) {
@@ -38,9 +35,7 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
   const handleAdd = () => {
     setOpen(false);
     const id: Key = `KarateLesson${type}${date?.format("DDMMYYYY")}`;
-    console.log(date);
     if (date == null) {
-      console.log(date);
       const day = new Date();
       day.setDate(day.getDate() - 1);
     }
@@ -138,15 +133,13 @@ export default function AddLesson({ setLesson }: AddLessonProps) {
             dateAdapter={AdapterDayjs}
             adapterLocale={locale}
           >
-            <DesktopDatePicker
-              label="Date desktop"
+            <DateTimePicker
               inputFormat="DD/MM/YYYY"
               value={date}
               onChange={handleDateChange}
-              renderInput={(params) => (
+              renderInput={(props) => (
                 <TextField
-                  label={params.label}
-                  placeholder={params.placeholder}
+                  {...props}
                   data-cy="lessons-add-lesson-card-lesson-date"
                 />
               )}
